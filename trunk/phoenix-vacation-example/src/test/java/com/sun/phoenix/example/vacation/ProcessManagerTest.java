@@ -12,7 +12,7 @@ import com.sun.phoenix.components.store.NormalizingStore;
 import com.sun.phoenix.components.store.Store;
 import com.sun.phoenix.components.store.file.SerializedFileStore;
 import com.sun.phoenix.components.store.file.SimpleFilenameNormalizer;
-import com.sun.phoenix.factory.yaml.YamlProcessorFactoryRegistry;
+import com.sun.phoenix.factory.yaml.YamlProcessorFactoryLocator;
 
 public class ProcessManagerTest {
     private static final Logger logger = Logger.getLogger(ProcessManagerTest.class.getName());
@@ -26,7 +26,7 @@ public class ProcessManagerTest {
         final Store cachingStore = new CachingStore(normalizingStore, 4096);
         processorManager.setStore(cachingStore);
         
-        final YamlProcessorFactoryRegistry processorFactoryLocator = new YamlProcessorFactoryRegistry();
+        final YamlProcessorFactoryLocator processorFactoryLocator = new YamlProcessorFactoryLocator();
         processorFactoryLocator.addProcessor(new FileReader("vacation.yaml"));
         processorManager.setProcessorFactoryLocator(processorFactoryLocator);
 
