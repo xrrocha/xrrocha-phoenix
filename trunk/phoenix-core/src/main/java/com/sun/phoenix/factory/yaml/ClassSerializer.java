@@ -1,4 +1,4 @@
-package com.sun.phoenix.components.factory.yaml;
+package com.sun.phoenix.factory.yaml;
 
 import net.sourceforge.yamlbeans.YamlException;
 import net.sourceforge.yamlbeans.scalar.ScalarSerializer;

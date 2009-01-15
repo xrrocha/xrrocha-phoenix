@@ -1,21 +1,20 @@
-package com.sun.phoenix.components.factory.yaml;
+package com.sun.phoenix.components.factory;
 
 
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import com.sun.phoenix.components.factory.ObjectFactory;
 
-public class YamlBeansObjectFactory<T> implements ObjectFactory<T> {
+public class SimpleObjectFactory<T> implements ObjectFactory<T> {
     private Map<String, Object> properties;
     private Map<String, Object> transientProperties;
     
-    private Class<T> processorClass;
+    private Class<T> clazz;
 
     @Override
     public T newInstance() throws Exception {
-        T instance = processorClass.newInstance();
+        T instance = clazz.newInstance();
         populateProperties(instance, properties);
         populateProperties(instance, transientProperties);
         return instance;
@@ -33,17 +32,17 @@ public class YamlBeansObjectFactory<T> implements ObjectFactory<T> {
     }
 
     public String toString() {
-        return "class:" + processorClass.getName() + "\n" +
+        return "class:" + clazz.getName() + "\n" +
                "properties: " + properties + "\n" +
                "transientProperties: " + transientProperties;
         		
     }
     
-    public Class<T> getProcessorClass() {
-    	return processorClass;
+    public Class<T> getClazz() {
+    	return clazz;
     }
-    public void setProcessorClass(Class<T> clazz) {
-    	this.processorClass = clazz;
+    public void setClazz(Class<T> clazz) {
+    	this.clazz = clazz;
     }
 
     public Map<String, Object> getProperties() {

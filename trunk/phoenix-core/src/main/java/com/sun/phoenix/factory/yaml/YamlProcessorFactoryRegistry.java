@@ -9,8 +9,6 @@ import net.sourceforge.yamlbeans.YamlConfig;
 import net.sourceforge.yamlbeans.YamlReader;
 import net.sourceforge.yamlbeans.scalar.ScalarSerializer;
 
-import com.sun.phoenix.components.factory.yaml.ClassSerializer;
-import com.sun.phoenix.components.factory.yaml.PatternScalarSerializer;
 import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.ProcessorFactoryImpl;
 import com.sun.phoenix.factory.ProcessorFactoryRegistry;
