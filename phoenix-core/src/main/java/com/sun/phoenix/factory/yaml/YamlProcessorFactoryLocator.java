@@ -11,7 +11,6 @@ import net.sourceforge.yamlbeans.scalar.ScalarSerializer;
 
 import com.sun.phoenix.components.factory.yaml.ClassSerializer;
 import com.sun.phoenix.components.factory.yaml.PatternScalarSerializer;
-import com.sun.phoenix.components.factory.yaml.YamlBeansObjectFactory;
 import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.ProcessorFactoryImpl;
 import com.sun.phoenix.factory.ProcessorFactoryLocator;
@@ -23,8 +22,6 @@ public class YamlProcessorFactoryLocator implements ProcessorFactoryLocator {
     static {
         yamlConfig.setScalarSerializer(Class.class, classSerializer);
         yamlConfig.setScalarSerializer(Pattern.class, patternSerializer);
-        yamlConfig.setClassTag("yamlFactory", YamlBeansObjectFactory.class);
-        yamlConfig.setClassTag("processorConfiguration", ProcessorFactoryImpl.class);
     }
     
     private Set<ProcessorFactoryImpl> processorFactories = new LinkedHashSet<ProcessorFactoryImpl>();

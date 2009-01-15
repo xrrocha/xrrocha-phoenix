@@ -1,8 +1,8 @@
---- !processorConfiguration
+--- # Vacation request example processor
 
     uriPattern: "/vacationRequest" # Redundant with respect to top-level processor's initiating uri?
 
-    processorFactory: !yamlFactory # How to omit?
+    processorFactory:
         clazz: com.sun.phoenix.example.vacation.VacationRequestProcessor
         
         transientProperties:
@@ -21,19 +21,19 @@
                     emp01: !com.sun.phoenix.example.vacation.Employee
                         id: emp01
                         name:
-                            firstName: John
-                            lastName: Doe
-                        email: john.doe@acme.com
+                            firstName: Ricardo
+                            lastName: Rocha
+                        email: ricardo.rocha@sun.com
                         managerId: emp02
                     emp02: !com.sun.phoenix.example.vacation.Employee
                         id: emp02
                         name:
-                            firstName: Mary
-                            lastName: Smith
-                        email: mary.smith@acme.com
+                            firstName: Gabe
+                            lastName: Badescu
+                        email: gabriel.badescu@sun.com
         properties:
-            humanResourcesEmail: hr@acme.com
-            vacationServiceEmail: vacation@acme.com
+            humanResourcesEmail: xrrocha@yahoo.com
+            vacationServiceEmail: xrrocha@yahoo.com
             
             vacationTitleTemplate: Vacation request from ${employee.name}
             

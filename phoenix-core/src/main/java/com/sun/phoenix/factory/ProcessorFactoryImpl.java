@@ -7,16 +7,16 @@ import java.util.regex.Pattern;
 
 import com.sun.phoenix.Processor;
 import com.sun.phoenix.builder.ObjectBuilder;
-import com.sun.phoenix.components.factory.ObjectFactory;
+import com.sun.phoenix.components.factory.yaml.YamlBeansObjectFactory;
 
 public class ProcessorFactoryImpl implements ProcessorFactory {
     private Pattern uriPattern;
-    private ObjectFactory<Processor<?>> processorFactory;
+    private /*ObjectFactory<Processor<?>>*/YamlBeansObjectFactory<Processor<?>> processorFactory;
     private ObjectBuilder requestBuilder;
     
     public ProcessorFactoryImpl() {}
     
-    public ProcessorFactoryImpl(Pattern pattern, ObjectFactory<Processor<?>> objectFactory, ObjectBuilder objectBuilder) {
+    public ProcessorFactoryImpl(Pattern pattern, YamlBeansObjectFactory<Processor<?>> objectFactory, ObjectBuilder objectBuilder) {
         this.uriPattern = pattern;
         this.processorFactory = objectFactory;
         this.requestBuilder = objectBuilder;
@@ -55,11 +55,11 @@ public class ProcessorFactoryImpl implements ProcessorFactory {
         this.uriPattern = uriPattern;
     }
 
-    public ObjectFactory<Processor<?>> getProcessorFactory() {
+    public YamlBeansObjectFactory<Processor<?>> getProcessorFactory() {
         return processorFactory;
     }
 
-    public void setProcessorFactory(ObjectFactory<Processor<?>> processorFactory) {
+    public void setProcessorFactory(YamlBeansObjectFactory<Processor<?>> processorFactory) {
         this.processorFactory = processorFactory;
     }
 
