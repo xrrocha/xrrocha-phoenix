@@ -27,7 +27,7 @@ public class ProcessManagerTest {
         processorManager.setStore(cachingStore);
         
         final YamlProcessorFactoryRegistry processorFactoryRegistry = new YamlProcessorFactoryRegistry();
-        processorFactoryRegistry.addProcessor(new FileReader("vacation.yaml"));
+        processorFactoryRegistry.addProcessor(new FileReader("vacation.yaml"), ProcessManagerTest.class.getClassLoader());
         processorManager.setProcessorFactoryRegistry(processorFactoryRegistry);
 
         deleteDirectory("repository");

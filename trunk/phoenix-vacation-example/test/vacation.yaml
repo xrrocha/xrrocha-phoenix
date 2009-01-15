@@ -3,7 +3,7 @@
     uriPattern: "/vacationRequest" # Redundant with respect to top-level processor's initiating uri?
 
     processorFactory:
-        processorClass: com.sun.phoenix.example.vacation.VacationRequestProcessor
+        clazz: com.sun.phoenix.example.vacation.VacationRequestProcessor
 
         properties:
             humanResourcesEmail: xrrocha@yahoo.com
