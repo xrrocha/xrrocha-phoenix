@@ -3,34 +3,8 @@
     uriPattern: "/vacationRequest" # Redundant with respect to top-level processor's initiating uri?
 
     processorFactory:
-        clazz: com.sun.phoenix.example.vacation.VacationRequestProcessor
-        
-        transientProperties:
-            mailer: !com.sun.phoenix.example.vacation.Mailer
-                host: localhost
-                port: 25
-                user: john
-                password: doe
-                
-            templateExpander: !com.sun.phoenix.example.vacation.TemplateExpander
-                openingDelimiter: "${"
-                closingDelimiter: "}"
-                
-            employeeLocator: !com.sun.phoenix.example.vacation.EmployeeLocator
-                employees:
-                    emp01: !com.sun.phoenix.example.vacation.Employee
-                        id: emp01
-                        name:
-                            firstName: Ricardo
-                            lastName: Rocha
-                        email: ricardo.rocha@sun.com
-                        managerId: emp02
-                    emp02: !com.sun.phoenix.example.vacation.Employee
-                        id: emp02
-                        name:
-                            firstName: Gabe
-                            lastName: Badescu
-                        email: gabriel.badescu@sun.com
+        processorClass: com.sun.phoenix.example.vacation.VacationRequestProcessor
+
         properties:
             humanResourcesEmail: xrrocha@yahoo.com
             vacationServiceEmail: xrrocha@yahoo.com
@@ -74,6 +48,33 @@
                 At your convenience please visit
                 http://hr.acme.com/vacationRequest/${employee.id}/employeeAcknowledgement
                 to acknowledge receipt of this notification
+        
+        transientProperties:
+            mailer: !com.sun.phoenix.example.vacation.Mailer
+                host: localhost
+                port: 25
+                user: john
+                password: doe
+                
+            templateExpander: !com.sun.phoenix.example.vacation.TemplateExpander
+                openingDelimiter: "${"
+                closingDelimiter: "}"
+                
+            employeeLocator: !com.sun.phoenix.example.vacation.EmployeeLocator
+                employees:
+                    emp01: !com.sun.phoenix.example.vacation.Employee
+                        id: emp01
+                        name:
+                            firstName: Ricardo
+                            lastName: Rocha
+                        email: ricardo.rocha@sun.com
+                        managerId: emp02
+                    emp02: !com.sun.phoenix.example.vacation.Employee
+                        id: emp02
+                        name:
+                            firstName: Gabe
+                            lastName: Badescu
+                        email: gabriel.badescu@sun.com
 
     requestBuilder: !com.sun.phoenix.builder.XStreamObjectBuilder
         dateFormat: "yyyy/mm/dd" # TODO Request setter-only bean properties

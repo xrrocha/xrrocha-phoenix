@@ -11,11 +11,11 @@ public class YamlBeansObjectFactory<T> implements ObjectFactory<T> {
     private Map<String, Object> properties;
     private Map<String, Object> transientProperties;
     
-    private Class<T> clazz;
+    private Class<T> processorClass;
 
     @Override
     public T newInstance() throws Exception {
-        T instance = clazz.newInstance();
+        T instance = processorClass.newInstance();
         populateProperties(instance, properties);
         populateProperties(instance, transientProperties);
         return instance;
@@ -33,17 +33,17 @@ public class YamlBeansObjectFactory<T> implements ObjectFactory<T> {
     }
 
     public String toString() {
-        return "class:" + clazz.getName() + "\n" +
+        return "class:" + processorClass.getName() + "\n" +
                "properties: " + properties + "\n" +
                "transientProperties: " + transientProperties;
         		
     }
     
-    public Class<T> getClazz() {
-    	return clazz;
+    public Class<T> getProcessorClass() {
+    	return processorClass;
     }
-    public void setClazz(Class<T> clazz) {
-    	this.clazz = clazz;
+    public void setProcessorClass(Class<T> clazz) {
+    	this.processorClass = clazz;
     }
 
     public Map<String, Object> getProperties() {
