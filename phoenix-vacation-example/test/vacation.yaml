@@ -1,0 +1,83 @@
+--- !processorConfiguration
+
+    uriPattern: "/vacationRequest" # Redundant with respect to top-level processor's initiating uri?
+
+    processorFactory: !yamlFactory # How to omit?
+        clazz: com.sun.phoenix.example.vacation.VacationRequestProcessor
+        
+        transientProperties:
+            mailer: !com.sun.phoenix.example.vacation.Mailer
+                host: localhost
+                port: 25
+                user: john
+                password: doe
+                
+            templateExpander: !com.sun.phoenix.example.vacation.TemplateExpander
+                openingDelimiter: "${"
+                closingDelimiter: "}"
+                
+            employeeLocator: !com.sun.phoenix.example.vacation.EmployeeLocator
+                employees:
+                    emp01: !com.sun.phoenix.example.vacation.Employee
+                        id: emp01
+                        name:
+                            firstName: John
+                            lastName: Doe
+                        email: john.doe@acme.com
+                        managerId: emp02
+                    emp02: !com.sun.phoenix.example.vacation.Employee
+                        id: emp02
+                        name:
+                            firstName: Mary
+                            lastName: Smith
+                        email: mary.smith@acme.com
+        properties:
+            humanResourcesEmail: hr@acme.com
+            vacationServiceEmail: vacation@acme.com
+            
+            vacationTitleTemplate: Vacation request from ${employee.name}
+            
+            employeeTemplate: >
+                Dear ${employee.name.firstName}: Your vacation request is being
+                processed. A notification has been sent to you manager
+                ${manager.name} as well as to the Human Resources department
+                
+            managerTemplate: >
+                Dear ${manager.name.firstName}: ${employee.name} has requested
+                vacation. At your convenience please visit
+                http://hr.acme.com/vacationRequest/${employee.id}/managerReply
+                to approve or reject this request.
+                In the request note ${employee.name} comments:
+                ${vacationRequest.comments}
+                
+            humanResourcesTemplate: >
+                ${employee.name} has requested vacation. At your convenience
+                please visit http://hr.acme.com/vacationRequest/${employee.id}/hrAcknowledgement
+                to acknowledge receipt of this notification.
+                In the request note ${employee.name} comments:
+                ${vacationRequest.comments}
+                
+            approvalTemplate: >
+                Dear ${employee.name.firstName}: we are pleased to inform you
+                that your vacation request has been approved.
+                In the approval note ${manager.name} comments:
+                ${managerReply.comments}.
+                At your convenience please visit
+                http://hr.acme.com/vacationRequest/${employee.id}/employeeAcknowledgement
+                to acknowledge receipt of this notification
+                
+            rejectionTemplate: >
+                Dear ${employee.name.firstName}: we regret to inform you that
+                your vacation request has been rejected.
+                In the rejection note ${manager.name} comments:
+                ${managerReply.comments}.
+                At your convenience please visit
+                http://hr.acme.com/vacationRequest/${employee.id}/employeeAcknowledgement
+                to acknowledge receipt of this notification
+
+    requestBuilder: !com.sun.phoenix.builder.XStreamObjectBuilder
+        dateFormat: "yyyy/mm/dd" # TODO Request setter-only bean properties
+        aliases:
+            vacationRequest: com.sun.phoenix.example.vacation.VacationRequest
+            managerReply: com.sun.phoenix.example.vacation.ManagerReply
+            

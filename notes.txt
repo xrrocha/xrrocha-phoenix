@@ -1,0 +1,19 @@
+- Copied yamlbeans jar to local repository:
+
+ 	mvn  deploy:deploy-file \
+ 		 -DgroupId=net.sourceforge.yamlbeans \
+ 		 -DartifactId=yamlbeans \
+ 		 -Dversion=0.9.2 \
+ 		 -Dpackaging=jar \
+ 		 -Durl=file:$HOME/.m2/repository/ \
+ 		 -Dfile=yamlbeans-0.9.2.jar
+
+- Copied javaflow jar to local repository
+
+	mvn	deploy:deploy-file \
+		-DgroupId=org.apache.commons \
+		-DartifactId=javaflow \
+		-Dversion=1.0-SNAPSHOT \
+		-Dpackaging=jar \
+		-Durl=file:$HOME/.m2/repository/ \
+		-Dfile=javaflow-1.0-SNAPSHOT.jar 

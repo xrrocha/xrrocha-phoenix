@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>phoenix</artifactId>
+		<groupId>com.sun</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sun</groupId>
+	<artifactId>phoenix-vacation-example</artifactId>
+	<name>phoenix-vacation-example</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<!--
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="rewrite" classname="org.apache.commons.javaflow.ant.AntRewriteTask">
+									<classpath>
+										 <path refid="maven.compile.classpath"/>
+									</classpath>
+								</taskdef>
+								<rewrite srcdir="target/classes" destdir="target/classes"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					-->
+					<execution>
+						<id>test-compile</id>
+						<phase>test-compile</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="rewrite" classname="org.apache.commons.javaflow.ant.AntRewriteTask">
+									<classpath>
+										 <path refid="maven.compile.classpath"/>
+									</classpath>
+								</taskdef>
+								<rewrite srcdir="target/classes" destdir="target/classes"/>
+
+								<java classname="com.sun.phoenix.example.vacation.ProcessManagerTest" dir="test" fork="yes" failonerror="yes">
+									<jvmarg value="-Djava.util.logging.config.file=logging.properties" />
+									<classpath>
+										<path refid="maven.compile.classpath" />
+										<path refid="maven.runtime.classpath" />
+										<path refid="maven.test.classpath" />
+									</classpath>
+								</java>
+
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>phoenix-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
