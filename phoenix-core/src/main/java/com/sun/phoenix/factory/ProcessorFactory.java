@@ -6,6 +6,6 @@ public interface ProcessorFactory {
     public Processor<?> newProcessor() throws Exception;
     public Object buildRequestObject(Object requestSource) throws Exception;
     public void restoreTransientProperties(Processor<?> processor) throws Exception;
-    // public ClasssLoader getClassLoader();
-    // public Class<?> getProcessorArgumentClass();
+    public ClassLoader getClassLoader();
+    public Class<?> getProcessorArgumentClass();
 }

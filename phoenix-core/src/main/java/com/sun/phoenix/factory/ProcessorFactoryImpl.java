@@ -3,70 +3,85 @@
  */
 package com.sun.phoenix.factory;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.regex.Pattern;
 
 import com.sun.phoenix.Processor;
 import com.sun.phoenix.components.builder.ObjectBuilder;
 
 public class ProcessorFactoryImpl implements ProcessorFactory {
-    private Pattern uriPattern;
-    private SimpleObjectFactory<Processor<?>> processorFactory;
-    private ObjectBuilder requestBuilder;
-    
-    public ProcessorFactoryImpl() {}
-    
-    public ProcessorFactoryImpl(Pattern pattern, SimpleObjectFactory<Processor<?>> objectFactory, ObjectBuilder objectBuilder) {
-        this.uriPattern = pattern;
-        this.processorFactory = objectFactory;
-        this.requestBuilder = objectBuilder;
-    }
-    
-    public boolean matches(String uri) {
-        return uriPattern.matcher(uri).find(0);
-    }
+	private Pattern uriPattern;
+	private SimpleObjectFactory<Processor<?>> processorFactory;
+	private ObjectBuilder requestBuilder;
 
-    @Override
-    public Processor<?> newProcessor() throws Exception {
-        return processorFactory.newInstance();
-    }
+	public ProcessorFactoryImpl() {
+	}
 
-    @Override
-    public Object buildRequestObject(Object requestSource) throws Exception {
-        if (requestSource == null) {
-            return null;
-        }
-        if (requestBuilder == null) {
-        	return requestSource;
-        }
-        return requestBuilder.buildObject(requestSource);
-    }
+	public ProcessorFactoryImpl(Pattern pattern, SimpleObjectFactory<Processor<?>> objectFactory, ObjectBuilder objectBuilder) {
+		this.uriPattern = pattern;
+		this.processorFactory = objectFactory;
+		this.requestBuilder = objectBuilder;
+	}
 
-    @Override
-    public void restoreTransientProperties(Processor<?> processor) throws Exception {
-    	processorFactory.restoreTransientProperties(processor);
-    }
+	public boolean matches(String uri) {
+		return uriPattern.matcher(uri).find(0);
+	}
 
-    public Pattern getUriPattern() {
-        return uriPattern;
-    }
+	@Override
+	public Processor<?> newProcessor() throws Exception {
+		return processorFactory.newInstance();
+	}
 
-    public void setUriPattern(Pattern uriPattern) {
-        this.uriPattern = uriPattern;
-    }
+	@Override
+	public Object buildRequestObject(Object requestSource) throws Exception {
+		if (requestSource == null) {
+			return null;
+		}
+		if (requestBuilder == null) {
+			return requestSource;
+		}
+		return requestBuilder.buildObject(requestSource);
+	}
 
-    public SimpleObjectFactory<Processor<?>> getProcessorFactory() {
-        return processorFactory;
-    }
+	@Override
+	public void restoreTransientProperties(Processor<?> processor) throws Exception {
+		processorFactory.restoreTransientProperties(processor);
+	}
 
-    public void setProcessorFactory(SimpleObjectFactory<Processor<?>> processorFactory) {
-        this.processorFactory = processorFactory;
-    }
+	@Override
+	public ClassLoader getClassLoader() {
+		return processorFactory.getClazz().getClassLoader();
+	}
 
-    public ObjectBuilder getRequestBuilder() {
-        return requestBuilder;
-    }
+	@Override
+	public Class<?> getProcessorArgumentClass() {
+		ParameterizedType parameterizedType = (ParameterizedType) processorFactory.getClazz().getGenericSuperclass();
+		Class<?> clazz = (Class<?>) parameterizedType.getActualTypeArguments()[0];
+		return clazz;
+	}
 
-    public void setRequestBuilder(ObjectBuilder requestBuilder) {
-        this.requestBuilder = requestBuilder;
-    }
+	public Pattern getUriPattern() {
+		return uriPattern;
+	}
+
+	public void setUriPattern(Pattern uriPattern) {
+		this.uriPattern = uriPattern;
+	}
+
+	public SimpleObjectFactory<Processor<?>> getProcessorFactory() {
+		return processorFactory;
+	}
+
+	public void setProcessorFactory(
+			SimpleObjectFactory<Processor<?>> processorFactory) {
+		this.processorFactory = processorFactory;
+	}
+
+	public ObjectBuilder getRequestBuilder() {
+		return requestBuilder;
+	}
+
+	public void setRequestBuilder(ObjectBuilder requestBuilder) {
+		this.requestBuilder = requestBuilder;
+	}
 }
