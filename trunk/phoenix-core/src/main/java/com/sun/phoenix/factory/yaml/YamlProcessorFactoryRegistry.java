@@ -15,6 +15,9 @@ import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.ProcessorFactoryImpl;
 import com.sun.phoenix.factory.ProcessorFactoryRegistry;
 
+//ParameterizedType parameterizedType = (ParameterizedType) VacationRequestProcessor.class.getGenericSuperclass();
+//Class<?extends Processor<?>> clazz = (Class<?extends Processor<?>>) parameterizedType.getActualTypeArguments()[0];
+
 public class YamlProcessorFactoryRegistry implements ProcessorFactoryRegistry {
     private static final YamlConfig yamlConfig = new YamlConfig();
     private static final ScalarSerializer<Class<?>> classSerializer = new ClassSerializer();
