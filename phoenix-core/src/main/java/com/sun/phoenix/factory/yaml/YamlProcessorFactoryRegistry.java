@@ -17,17 +17,17 @@ import com.sun.phoenix.factory.ProcessorFactoryRegistry;
 //Class<?extends Processor<?>> clazz = (Class<?extends Processor<?>>) parameterizedType.getActualTypeArguments()[0];
 
 public class YamlProcessorFactoryRegistry implements ProcessorFactoryRegistry {
-    private static final YamlConfig yamlConfig = new YamlConfig();
     private static final ScalarSerializer<Class<?>> classSerializer = new ClassSerializer();
     private static final ScalarSerializer<Pattern> patternSerializer = new PatternScalarSerializer();
-    static {
-        yamlConfig.setScalarSerializer(Class.class, classSerializer);
-        yamlConfig.setScalarSerializer(Pattern.class, patternSerializer);
-    }
     
     private Set<ProcessorFactoryImpl> processorFactories = new LinkedHashSet<ProcessorFactoryImpl>();
 
-    public void addProcessor(Reader reader) throws Exception {
+    public void addProcessor(Reader reader, ClassLoader classLoader) throws Exception {
+        YamlConfig yamlConfig = new YamlConfig();
+    	yamlConfig.readConfig.setClassLoader(classLoader);
+        yamlConfig.setScalarSerializer(Class.class, classSerializer);
+        yamlConfig.setScalarSerializer(Pattern.class, patternSerializer);
+
         YamlReader yamlReader = new YamlReader(reader, yamlConfig);
         
         ProcessorFactoryImpl processorFactory = yamlReader.read(ProcessorFactoryImpl.class);
