@@ -15,20 +15,20 @@ import org.apache.commons.javaflow.Continuation;
 
 import com.sun.phoenix.components.store.Store;
 import com.sun.phoenix.factory.ProcessorFactory;
-import com.sun.phoenix.factory.ProcessorFactoryLocator;
+import com.sun.phoenix.factory.ProcessorFactoryRegistry;
 
 // FIXME: Why should processorManager be serializable at all?
 public class ProcessorManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	transient private Store store;
-	transient private ProcessorFactoryLocator processorFactoryLocator;
+	transient private ProcessorFactoryRegistry processorFactoryRegistry;
 
     private static Logger logger = Logger.getLogger(ProcessorManager.class.getName());
 
     public void process(String uri, Object requestSource) throws Exception {
         final ContinuationToken continuationToken = getContinuationToken(uri);
-        final ProcessorFactory processorFactory = processorFactoryLocator.locateProcessorFactory(uri);
+        final ProcessorFactory processorFactory = processorFactoryRegistry.locateProcessorFactory(uri);
         if (continuationToken == null) {
             if (processorFactory != null) {
                 newInstance(uri, processorFactory, requestSource);
@@ -131,7 +131,7 @@ public class ProcessorManager implements Serializable {
                 if (dependentWrapper.getJoinDependencies().size() == 0) {
                     logger.info("Last dependency satisfied, resuming: " + dependentUri);
                     dependentWrapper.processor.setProcessManager(this);
-					ProcessorFactory processorFactory = processorFactoryLocator.locateProcessorFactory(dependentUri);
+					ProcessorFactory processorFactory = processorFactoryRegistry.locateProcessorFactory(dependentUri);
 					if (processorFactory != null) {
 						// Needed to restore transient processor configuration after deserialization
 						logger.info("Restoring transient properties");
@@ -277,11 +277,11 @@ public class ProcessorManager implements Serializable {
         this.store = store;
     }
 
-    public ProcessorFactoryLocator getProcessorFactoryLocator() {
-        return processorFactoryLocator;
+    public ProcessorFactoryRegistry getProcessorFactoryRegistry() {
+        return processorFactoryRegistry;
     }
 
-    public void setProcessorFactoryLocator(ProcessorFactoryLocator processorFactoryLocator) {
-        this.processorFactoryLocator = processorFactoryLocator;
+    public void setProcessorFactoryRegistry(ProcessorFactoryRegistry processorFactoryLocator) {
+        this.processorFactoryRegistry = processorFactoryLocator;
     }
 }
