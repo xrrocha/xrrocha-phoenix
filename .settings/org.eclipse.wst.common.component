@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId">
-    <wb-module deploy-name="phoenix"/>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="phoenix">
+        <wb-resource deploy-path="/" source-path="/phoenix-core/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/phoenix-core/src/test/java"/>
+        <wb-resource deploy-path="/" source-path="/phoenix-web/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/phoenix-web/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/phoenix-vacation-example/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/phoenix-vacation-example/src/test/java"/>
+    </wb-module>
 </project-modules>
