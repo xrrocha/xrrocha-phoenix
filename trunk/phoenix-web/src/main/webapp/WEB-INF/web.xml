@@ -3,5 +3,16 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Phoenix WebApp</display-name>
+	<display-name>Phoenix WebApp</display-name>
+
+	<!--
+	<context-param>
+		<param-name>xxx</param-name>
+		<param-value>XXX</param-value>
+	</context-param>
+	-->
+
+	<listener>
+		<listener-class>com.sun.phoenix.web.PhoenixListener</listener-class>
+	</listener>
 </web-app>
