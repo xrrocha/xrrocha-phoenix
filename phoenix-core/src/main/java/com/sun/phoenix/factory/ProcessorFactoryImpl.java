@@ -11,7 +11,7 @@ import com.sun.phoenix.components.factory.yaml.YamlBeansObjectFactory;
 
 public class ProcessorFactoryImpl implements ProcessorFactory {
     private Pattern uriPattern;
-    private /*ObjectFactory<Processor<?>>*/YamlBeansObjectFactory<Processor<?>> processorFactory;
+    private YamlBeansObjectFactory<Processor<?>> processorFactory;
     private ObjectBuilder requestBuilder;
     
     public ProcessorFactoryImpl() {}
