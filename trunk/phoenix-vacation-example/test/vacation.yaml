@@ -76,7 +76,7 @@
                             lastName: Badescu
                         email: gabriel.badescu@sun.com
 
-    requestBuilder: !com.sun.phoenix.builder.XStreamObjectBuilder
+    requestBuilder: !com.sun.phoenix.components.builder.XStreamObjectBuilder
         dateFormat: "yyyy/mm/dd" # TODO Request setter-only bean properties
         aliases:
             vacationRequest: com.sun.phoenix.example.vacation.VacationRequest
