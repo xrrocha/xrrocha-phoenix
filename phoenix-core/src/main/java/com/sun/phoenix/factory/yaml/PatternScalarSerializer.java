@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sun.phoenix.components.factory.yaml;
+package com.sun.phoenix.factory.yaml;
 
 import java.util.regex.Pattern;
 
