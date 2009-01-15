@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import com.sun.phoenix.Processor;
 import com.sun.phoenix.components.builder.ObjectBuilder;
-import com.sun.phoenix.components.factory.SimpleObjectFactory;
 
 public class ProcessorFactoryImpl implements ProcessorFactory {
     private Pattern uriPattern;
