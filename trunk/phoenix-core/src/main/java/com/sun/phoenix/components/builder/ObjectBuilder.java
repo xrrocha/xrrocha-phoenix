@@ -1,4 +1,4 @@
-package com.sun.phoenix.builder;
+package com.sun.phoenix.components.builder;
 
 
 public interface ObjectBuilder {

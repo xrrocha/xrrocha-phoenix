@@ -1,4 +1,4 @@
-package com.sun.phoenix.builder.beanform;
+package com.sun.phoenix.components.builder;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -6,24 +6,23 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sun.phoenix.builder.ObjectBuilder;
 import com.sun.phoenix.util.beanform.serializer.Serializers;
 import com.sun.phoenix.util.beanform.serializer.Serializer;
 
-public class Map2Bean implements ObjectBuilder {
+public class Map2BeanObjectBuilder implements ObjectBuilder {
 	private Class<?> beanClass;
 	private Map<Class<?>, Serializer<?>> serializers;
 	
-	public Map2Bean() {
+	public Map2BeanObjectBuilder() {
 		serializers = new HashMap<Class<?>, Serializer<?>>(Serializers.getGlobalSerializers());
 	}
 	
-	public Map2Bean(Class<?> beanClass) {
+	public Map2BeanObjectBuilder(Class<?> beanClass) {
 		this.beanClass = beanClass;
 		serializers = new HashMap<Class<?>, Serializer<?>>(Serializers.getGlobalSerializers());
 	}
 	
-	public Map2Bean(Class<?> beanClass, Map<Class<?>, Serializer<?>> parsers) {
+	public Map2BeanObjectBuilder(Class<?> beanClass, Map<Class<?>, Serializer<?>> parsers) {
 		this.beanClass = beanClass;
 		this.serializers = parsers;
 	}
@@ -42,9 +41,9 @@ public class Map2Bean implements ObjectBuilder {
 			if (writeMethod != null) {
 				String value = map.get(propertyDescriptor.getName());
 				if (value != null) {
-					Serializer<?> parser = serializers.get(propertyDescriptor.getPropertyType());
-					if (parser != null) {
-						Object propertyValue = parser.parse(value);
+					Serializer<?> serializer = serializers.get(propertyDescriptor.getPropertyType());
+					if (serializer != null) {
+						Object propertyValue = serializer.parse(value);
 						writeMethod.invoke(instance, new Object[] {propertyValue});
 					}
 				}

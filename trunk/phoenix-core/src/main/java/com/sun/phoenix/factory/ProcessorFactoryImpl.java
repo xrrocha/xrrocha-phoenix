@@ -6,7 +6,7 @@ package com.sun.phoenix.factory;
 import java.util.regex.Pattern;
 
 import com.sun.phoenix.Processor;
-import com.sun.phoenix.builder.ObjectBuilder;
+import com.sun.phoenix.components.builder.ObjectBuilder;
 import com.sun.phoenix.components.factory.yaml.YamlBeansObjectFactory;
 
 public class ProcessorFactoryImpl implements ProcessorFactory {

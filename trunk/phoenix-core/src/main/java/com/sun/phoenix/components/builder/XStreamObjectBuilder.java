@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sun.phoenix.builder;
+package com.sun.phoenix.components.builder;
 
 import java.io.Reader;
 import java.util.Map;
