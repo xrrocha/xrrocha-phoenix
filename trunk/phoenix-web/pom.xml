@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>phoenix</artifactId>
+		<groupId>com.sun</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sun</groupId>
+	<artifactId>phoenix-web</artifactId>
+	<packaging>war</packaging>
+	<name>Phoenix Webapp</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<url>http://maven.apache.org</url>
+	<build>
+		<finalName>phoenix-web</finalName>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>phoenix-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>javaflow</artifactId>
+			<version>1.0-20090115.025723-1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.bcel</groupId>
+			<artifactId>bcel</artifactId>
+			<version>5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>0.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.0-BETA</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
