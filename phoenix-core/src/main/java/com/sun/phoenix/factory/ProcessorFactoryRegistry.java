@@ -1,6 +1,6 @@
 package com.sun.phoenix.factory;
 
 
-public interface ProcessorFactoryLocator {
+public interface ProcessorFactoryRegistry {
     public ProcessorFactory locateProcessorFactory(String uri) throws Exception;
 }

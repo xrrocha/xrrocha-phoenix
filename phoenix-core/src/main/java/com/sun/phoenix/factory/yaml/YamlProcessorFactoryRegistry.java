@@ -13,9 +13,9 @@ import com.sun.phoenix.components.factory.yaml.ClassSerializer;
 import com.sun.phoenix.components.factory.yaml.PatternScalarSerializer;
 import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.ProcessorFactoryImpl;
-import com.sun.phoenix.factory.ProcessorFactoryLocator;
+import com.sun.phoenix.factory.ProcessorFactoryRegistry;
 
-public class YamlProcessorFactoryLocator implements ProcessorFactoryLocator {
+public class YamlProcessorFactoryRegistry implements ProcessorFactoryRegistry {
     private static final YamlConfig yamlConfig = new YamlConfig();
     private static final ScalarSerializer<Class<?>> classSerializer = new ClassSerializer();
     private static final ScalarSerializer<Pattern> patternSerializer = new PatternScalarSerializer();
