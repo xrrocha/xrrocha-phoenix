@@ -17,7 +17,7 @@ import com.sun.phoenix.components.store.Store;
 import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.ProcessorFactoryRegistry;
 
-// FIXME: Why should processorManager be serializable at all?
+// FIXME: Why should this class be serializable at all?
 public class ProcessorManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -45,34 +45,6 @@ public class ProcessorManager implements Serializable {
             } else {
                 logger.warning("Requested process instance has no outstanding dependencies: " + uri);
             }
-        }
-    }
-
-    public ProcessInfo[] getProcessInfo() throws Exception {
-        final List<ProcessInfo> processInfos = new ArrayList<ProcessInfo>();
-        for (final String identifier : store.identifiers()) {
-            final ProcessInfo processInfo = new ProcessInfo();
-            final ContinuationToken continuationToken = getContinuationToken(identifier);
-
-            processInfo.setUri(continuationToken.uri);
-            if (continuationToken.continuation != null) {
-                processInfo.setStatus(SUSPENDED);
-            } else {
-                processInfo.setStatus(SCHEDULED);
-            }
-
-            processInfos.add(processInfo);
-        }
-        return processInfos.toArray(new ProcessInfo[processInfos.size()]);
-    }
-    
-    public Object query(String uri) throws Exception {
-        final ContinuationToken continuationToken = getContinuationToken(uri);
-        if (continuationToken != null && continuationToken.processor != null) {
-            return continuationToken.processor.query();
-        } else {
-            logger.warning("No such process: " + uri);
-            return null;
         }
     }
 
@@ -135,7 +107,7 @@ public class ProcessorManager implements Serializable {
 					if (processorFactory != null) {
 						// Needed to restore transient processor configuration after deserialization
 						logger.info("Restoring transient properties");
-					    processorFactory.restoreTransientProperties(dependentWrapper.processor);
+					    processorFactory.restoreProcessor(dependentWrapper.processor);
 					}
                     final Continuation c = Continuation.continueWith(dependentWrapper.continuation);
                     if (c != null) {
@@ -147,6 +119,34 @@ public class ProcessorManager implements Serializable {
                     }
                 }
             }
+        }
+    }
+
+    public ProcessInfo[] getProcessInfo() throws Exception {
+        final List<ProcessInfo> processInfos = new ArrayList<ProcessInfo>();
+        for (final String identifier : store.identifiers()) {
+            final ProcessInfo processInfo = new ProcessInfo();
+            final ContinuationToken continuationToken = getContinuationToken(identifier);
+
+            processInfo.setUri(continuationToken.uri);
+            if (continuationToken.continuation != null) {
+                processInfo.setStatus(SUSPENDED);
+            } else {
+                processInfo.setStatus(SCHEDULED);
+            }
+
+            processInfos.add(processInfo);
+        }
+        return processInfos.toArray(new ProcessInfo[processInfos.size()]);
+    }
+    
+    public Object query(String uri) throws Exception {
+        final ContinuationToken continuationToken = getContinuationToken(uri);
+        if (continuationToken != null && continuationToken.processor != null) {
+            return continuationToken.processor.query();
+        } else {
+            logger.warning("No such process: " + uri);
+            return null;
         }
     }
 
