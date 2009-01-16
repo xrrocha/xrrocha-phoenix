@@ -1,6 +1,6 @@
 --- # Vacation request example processor
 
-    uriPattern: "/vacationRequest" # Heading slash is redundant
+    uriPattern: "vacationRequest" # Heading slash is redundant
     uriExpression: "employeeId"
 
     processorFactory:
