@@ -32,15 +32,15 @@ public class ProcessManagerTest {
         processorFactoryRegistry.addProcessor(new FileReader("vacation.yaml"), ProcessManagerTest.class.getClassLoader());
         processorManager.setProcessorFactoryRegistry(processorFactoryRegistry);
         
-        ProcessorFactory processorFactory = processorFactoryRegistry.locateProcessorFactory("/vacationRequest");
+        ProcessorFactory processorFactory = processorFactoryRegistry.locateProcessorFactory("vacationRequest");
         VacationRequest vacationRequest = new VacationRequest("xyz", new Date(), new Date(), "Wanna rest");
         String instanceUri = processorFactory.getInstanceUri(vacationRequest);
         logger.info("instanceUri: " + instanceUri);
 
         deleteDirectory("repository");
 
-        logger.info("Sending request /vacationRequest/emp01");
-        processorManager.process("/vacationRequest/emp01", new StringReader(
+        logger.info("Sending request vacationRequest/emp01");
+        processorManager.process("vacationRequest/emp01", new StringReader(
                 "<vacationRequest>" +
                     "<employeeId>emp01</employeeId>" +
                     "<startDate>1/1/2009</startDate>" +
@@ -49,20 +49,20 @@ public class ProcessManagerTest {
                 "</vacationRequest>"));
         printStatus(processorManager);
 
-        logger.info("Sending request /vacationRequest/emp01/hrAcknowledgement");
-        processorManager.process("/vacationRequest/emp01/hrAcknowledgement", null);
+        logger.info("Sending request vacationRequest/emp01/hrAcknowledgement");
+        processorManager.process("vacationRequest/emp01/hrAcknowledgement", null);
         printStatus(processorManager);
 
-        logger.info("Sending request /vacationRequest/emp01/managerReply");
-        processorManager.process("/vacationRequest/emp01/managerReply", new StringReader(
+        logger.info("Sending request vacationRequest/emp01/managerReply");
+        processorManager.process("vacationRequest/emp01/managerReply", new StringReader(
                 "<managerReply>" +
                     "<approved>true</approved>" +
                     "<comments>Have fun</comments>" +
                 "</managerReply>"));
         printStatus(processorManager);
 
-        logger.info("Sending request /vacationRequest/emp01/employeeAcknowledgement");
-        processorManager.process("/vacationRequest/emp01/employeeAcknowledgement", null);
+        logger.info("Sending request vacationRequest/emp01/employeeAcknowledgement");
+        processorManager.process("vacationRequest/emp01/employeeAcknowledgement", null);
         printStatus(processorManager);
     }
 
