@@ -57,7 +57,7 @@ public class ProcessorFactoryImpl implements ProcessorFactory {
 
 	@Override
 	public ClassLoader getClassLoader() {
-		return processorFactory.getClass().getClassLoader();
+		return processorFactory.getClazz().getClassLoader();
 	}
 
 	@Override
