@@ -150,18 +150,18 @@ public class ProcessorManager implements Serializable {
         }
     }
 
-    protected void expect(String receiveUri) throws Exception {
-        this.expect(receiveUri, (Processor<?>) null);
+    protected void expect(String expectUri) throws Exception {
+        this.expect(expectUri, (Processor<?>) null);
     }
 
-    protected void expect(final String receiveUri, final Processor<?> processor) throws Exception {
-        logger.info("Adding pending receive: " + receiveUri);
-        putWrapper(receiveUri, new ContinuationToken(processor, receiveUri, null));
+    protected void expect(final String expectUri, final Processor<?> processor) throws Exception {
+        logger.info("Adding pending receive: " + expectUri);
+        putWrapper(expectUri, new ContinuationToken(processor, expectUri, null));
     }
 
-    protected void removeExpect(final String receiveUri) throws Exception {
-        logger.info("Removing pending receive: " + receiveUri);
-        removeWrapper(receiveUri);
+    protected void removeExpect(final String expectUri) throws Exception {
+        logger.info("Removing pending receive: " + expectUri);
+        removeWrapper(expectUri);
     }
 
     protected void expect(String callerUri, String... calleeUris) throws Exception {

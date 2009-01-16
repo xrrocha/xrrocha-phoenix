@@ -18,20 +18,22 @@ public abstract class Processor<T> implements Serializable {
     protected abstract void process(T argument) throws Exception;
     protected Object query() throws Exception { return null; }
 
-    protected void expect(String receiveUri) throws Exception {
-        processorManager.expect(receiveUri);
+    protected void expect(String expectUri) throws Exception {
+        processorManager.expect(expectUri);
     }
 
-    protected void expect(String receiveUri, Processor<?> processor) throws Exception {
-        processorManager.expect(receiveUri, processor);
+    protected void expect(String expectUri, Processor<?> processor) throws Exception {
+    	processor.uri = expectUri;
+    	processor.processorManager = processorManager;
+        processorManager.expect(expectUri, processor);
     }
 
     protected void waitFor(String... uris) throws Exception {
         processorManager.expect(uri, uris);
     }
 
-    protected void removeExpect(String receiveUri) throws Exception {
-        processorManager.removeExpect(receiveUri);
+    protected void removeExpect(String expectUri) throws Exception {
+        processorManager.removeExpect(expectUri);
     }
 
     public String getUri() {
