@@ -50,8 +50,7 @@ public class VacationRequestProcessor extends Processor<VacationRequest> {
         sendMail(templateExpander.expand(humanResourcesTemplate, context), humanResourcesEmail);
 
         // TODO Pass only trailing portion of uri; remove dependency on uri prefix
-        // Possible FIXME: Local variables in anonymous processor may not be restored upon deserialization 
-        final String managerReplyUri = getUri() + "/managerReply";
+        final String managerReplyUri = "managerReply";
         expect(managerReplyUri, new Processor<ManagerReply>() {
             private static final long serialVersionUID = 1L;
 
@@ -62,7 +61,7 @@ public class VacationRequestProcessor extends Processor<VacationRequest> {
                 logger.info("Manager decision: " + (managerReply.isApproved() ? "Approved" : "Rejected"));
             }
         });
-        final String hrAcknowledgementUri = getUri() + "/hrAcknowledgement";
+        final String hrAcknowledgementUri = "hrAcknowledgement";
         expect(hrAcknowledgementUri);
 
         logger.info("Waiting for manager decision and HR acknowledgement");
@@ -76,7 +75,7 @@ public class VacationRequestProcessor extends Processor<VacationRequest> {
             sendMail(templateExpander.expand(rejectionTemplate, context), employee.getEmail(), humanResourcesEmail);
         }
 
-        final String employeeAcknowledgementUri = getUri() + "/employeeAcknowledgement";
+        final String employeeAcknowledgementUri = "employeeAcknowledgement";
         expect(employeeAcknowledgementUri);
 
         logger.info("Waiting for employee acknowledgement");
