@@ -1,6 +1,7 @@
 --- # Vacation request example processor
 
-    uriPattern: "/vacationRequest" # Redundant with respect to top-level processor's initiating uri?
+    uriPattern: "/vacationRequest" # Heading slash is redundant
+    uriExpression: "employeeId"
 
     processorFactory:
         clazz: com.sun.phoenix.example.vacation.VacationRequestProcessor

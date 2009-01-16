@@ -3,6 +3,7 @@ package com.sun.phoenix.example.vacation;
 import java.io.File;
 import java.io.FileReader;
 import java.io.StringReader;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import com.sun.phoenix.ProcessInfo;
@@ -12,6 +13,7 @@ import com.sun.phoenix.components.store.NormalizingStore;
 import com.sun.phoenix.components.store.Store;
 import com.sun.phoenix.components.store.file.SerializedFileStore;
 import com.sun.phoenix.components.store.file.SimpleFilenameNormalizer;
+import com.sun.phoenix.factory.ProcessorFactory;
 import com.sun.phoenix.factory.yaml.YamlProcessorFactoryRegistry;
 
 public class ProcessManagerTest {
@@ -29,6 +31,11 @@ public class ProcessManagerTest {
         final YamlProcessorFactoryRegistry processorFactoryRegistry = new YamlProcessorFactoryRegistry();
         processorFactoryRegistry.addProcessor(new FileReader("vacation.yaml"), ProcessManagerTest.class.getClassLoader());
         processorManager.setProcessorFactoryRegistry(processorFactoryRegistry);
+        
+        ProcessorFactory processorFactory = processorFactoryRegistry.locateProcessorFactory("/vacationRequest");
+        VacationRequest vacationRequest = new VacationRequest("xyz", new Date(), new Date(), "Wanna rest");
+        String instanceUri = processorFactory.getInstanceUri(vacationRequest);
+        logger.info("instanceUri: " + instanceUri);
 
         deleteDirectory("repository");
 

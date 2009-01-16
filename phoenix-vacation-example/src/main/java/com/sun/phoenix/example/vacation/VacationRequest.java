@@ -13,6 +13,15 @@ public class VacationRequest implements Serializable {
     private Date endDate;
     private String comments;
     
+    public VacationRequest() {}
+    
+    public VacationRequest(String employeeId, Date startDate, Date endDate, String comments) {
+    	setEmployeeId(employeeId);
+    	setStartDate(startDate);
+    	setEndDate(endDate);
+    	setComments(comments);
+    }
+    
     public String getEmployeeId() {
         return employeeId;
     }
