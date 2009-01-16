@@ -5,9 +5,8 @@ import java.io.File;
 import com.sun.phoenix.components.store.IdentifierNormalizer;
 
 public class SimpleFilenameNormalizer implements IdentifierNormalizer {
-    private final String separatorReplacement = "_";
-
-    private final String pathSeparatorReplacement = "__";
+    private final String separatorReplacement = "_@_";
+    private final String pathSeparatorReplacement = "__@__";
 
     @Override
     public String normalizeFilename(String filename) {
@@ -22,6 +21,12 @@ public class SimpleFilenameNormalizer implements IdentifierNormalizer {
             }
         }
         return builder.toString();
+    }
+
+    public String denormalizeFilename(String normalizedFilename) {
+    	String filename = normalizedFilename.replace(pathSeparatorReplacement, File.pathSeparator);
+    	filename = filename.replace(separatorReplacement, File.separator);
+    	return filename;
     }
 
     public String getSeparatorReplacement() {
