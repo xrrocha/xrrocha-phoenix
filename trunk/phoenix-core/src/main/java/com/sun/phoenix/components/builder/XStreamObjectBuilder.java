@@ -20,8 +20,8 @@ public class XStreamObjectBuilder implements ObjectBuilder {
     }
 
     @Override
-    public Object buildObject(Object source) throws Exception {
-        return xstream.fromXML((Reader) source);
+    public Object buildObject(Object prototype) throws Exception {
+        return xstream.fromXML((Reader) prototype);
     }
     
     public String getDateFormat() {

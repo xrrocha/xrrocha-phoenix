@@ -32,9 +32,9 @@ public class Map2BeanObjectBuilder implements ObjectBuilder {
 	}
 	
 	@Override
-	public Object buildObject(Object source) throws Exception {
+	public Object buildObject(Object prototype) throws Exception {
 		@SuppressWarnings("unchecked")
-		Map<String, String> map = (Map<String, String>) source;
+		Map<String, String> map = (Map<String, String>) prototype;
 		Object instance = beanClass.newInstance();
 		for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(beanClass).getPropertyDescriptors()) {
 			Method writeMethod = propertyDescriptor.getWriteMethod();
