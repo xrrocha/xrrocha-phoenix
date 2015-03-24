@@ -1,0 +1,1 @@
+Continuations-based process orchestration in Java. Based on the Javaflow library.
